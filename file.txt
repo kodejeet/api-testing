@@ -30,6 +30,45 @@ more like a database Query and results
 
 // ASSIGNMENT :
 
-{{baseURL}}/books/?limit=4 , returns with only 6 of those books
+{{baseURL}}/books/?limit=4 , returns with only 6 of those books (has to be 1-20)
 
-  
+
+//path variables 
+
+it was -- :bookId, it has a more detailed response
+
+path variables are not similar query Parameters
+
+ 
+now we want to order books using the book id , but first we have to add our authorization to our variables
+
+created two POST request in the collection. now we have one api-clients and Order Book, 
+
+to use order book we first have to register ourselves as a client. 
+
+go to the api cliets , add {
+   "clientName": "kode",
+   "clientEmail": "kode@gmail.com"
+}
+
+this shall be done in body => raw => JSON > enter
+
+we get a response , accessToken : a very long string
+
+use this same accessToken to create outselves a vairable so that i can be reused overall project
+
+{{accessToken}} as the CURRENT VALUE which is totally private unless shared 
+
+now go to the request tab and select authorization => Bearer Token add the {{accessToken}} 
+
+now we are authorized , we go to the Order Books and then we put this format but the name could be anything : 
+
+{
+  "bookId": 1,
+  "customerName": "John"
+}
+
+the order is placed with a response message : created : true , orderId : some string literal 
+
+
+
