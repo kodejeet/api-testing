@@ -1,0 +1,35 @@
+for the first get request we need the api url
+
+url =  https://simple-books-api.click/ 
+
+this one will get the message = {"message":"Welcome to the Simple Books API."}
+
+now there is another endpoint, the /status/ endpoint, returns when provided with the GET request
+ msg = {
+    "message": "Welcome to the Simple Books API."
+}
+
+now, we can also configure the params that we want to GET 
+
+
+we can also create. collections and there we can have the API url https://simple-books-api.click/ as the 
+variables set as baseURL lets suppose , we have to select the scope like env , global , or collections
+
+now there is the intitial value (public, can be shared)and the current value (private) 
+
+
+// Query Parameters now :
+
+ go to the params to search thru the response we have got , now enter the key value pair accordingly and we can filter 
+ out the results : {"id":2,"name":"Just as I Am","type":"non-fiction","available":false}
+ 
+where key = type and value = non-fiction  
+
+more like a database Query and results
+
+
+// ASSIGNMENT :
+
+{{baseURL}}/books/?limit=4 , returns with only 6 of those books
+
+  
