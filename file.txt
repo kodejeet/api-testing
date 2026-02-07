@@ -98,3 +98,99 @@ same as the patch method
 
 
 *this was the wrap, now we learn how to write scripts in postman for bigger systems*
+
+when we send the {{baseURL}}/status we get a status OK , but we can tell the Postman to test this for use
+
+for that we have to wrtie  scripts :
+
+
+from the snippets we get : 
+
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+// to get the response messages in the console directly, different ways : 
+
+console.log(response)
+
+console.log(response.json)
+
+console.log(response['status'])
+
+
+now we have our own function to fire a get request
+
+code : 
+
+pm.test("Status should be OK", () => {
+    // no error
+    // pm.expect(1).to.eql(1);
+    // error
+    // pm.expect(1).to.eql(2);
+
+    pm.expect(response.status).to.eql('OK');
+});
+
+we can always test all the endpoint with diff methods using scripts/tests :
+
+the most common test code is : 
+
+pm.test("Status code is 200", () => {
+    pm.response.to.have.status(200);
+});
+
+
+just the status codes needs to be changed, 200 for get , 201 for put and 204 for patch/DELETE
+
+we can also run the scripts for all the endpoints in the collection at once too.
+
+
+// WRITING SCRIPTS IN DEPTH
+
+lets suppose there are 10 books in the library and 6 of them are available and the rest aren't there
+so how do we extract from the response in postman into getting me the first book that's available
+the response comes in javascript arrays of objects , [{0}, {1}, {2}]
+
+
+in order to get me the first book available , the first element needs to be accessed through the postman scripts
+
+
+const response = pm.response.json();
+
+const firstAvaiblableBooks = response.filter((book) => 
+    book.available === true
+)
+
+console.log(firstAvaiblableBooks[0]) // [0]
+
+// this line creates the bookId as a variable and the current value for it to be 1, which was available
+pm.globals.set("bookId", firstAvaiblableBooks[0].id);
+
+// FINAL OVERVIEW : 
+
+
+pm.test("Status code is 200", () => {
+    pm.response.to.have.status(200);
+});
+
+const response = pm.response.json();
+
+const availableBooks = response.filter(book => book.available === true);
+const book = availableBooks[0] || null;
+
+pm.test("Book Found", () => {
+    pm.expect(book, "No available books found").to.not.be.null;
+    pm.expect(book).to.be.an('object');
+    pm.expect(book.available).to.be.true;
+});
+
+if (book) {
+    pm.globals.set("bookId", book.id);
+}
+
+console.log(book);
+
+
+// the rest can be found in the postman API Documentation. 
+https://learning.postman.com/docs/tests-and-scripts/write-scripts/postman-sandbox-reference/overview
