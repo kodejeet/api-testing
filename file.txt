@@ -55,7 +55,7 @@ this shall be done in body => raw => JSON > enter
 
 we get a response , accessToken : a very long string
 
-use this same accessToken to create outselves a vairable so that i can be reused overall project
+use this same accessToken to create ourselves a vairable so that i can be reused overall project
 
 {{accessToken}} as the CURRENT VALUE which is totally private unless shared 
 
@@ -63,12 +63,38 @@ now go to the request tab and select authorization => Bearer Token add the {{acc
 
 now we are authorized , we go to the Order Books and then we put this format but the name could be anything : 
 
-{
-  "bookId": 1,
-  "customerName": "John"
-}
 
 the order is placed with a response message : created : true , orderId : some string literal 
 
 
+for you to get the list of books just do a GET request on {{baseURL}}/orders/ and then add the 
+accessToken in the authoriazation bearer token , then boom
 
+ordering a book but with random name this time : 
+
+just put "customerName": "{{$randomFullName}}" along with the bookId
+
+now to check what we have sent over the request , goto terminal , clear logs send again 
+
+get order details per id : orders/:orderId
+
+// PATCH REQUEST
+
+more like update the already existing data on the server/db
+
+
+to update it : put the orderId in the path variables and patch request at {{baseURL}}/orders/:orderId
+
+send, the response status code will be 204 , and the body will be null (phi)
+
+now check again on the list of books ordered and we can see the change in it 
+
+
+
+// DELETE AND ORDER 
+
+same as the patch method
+
+
+
+*this was the wrap, now we learn how to write scripts in postman for bigger systems*
